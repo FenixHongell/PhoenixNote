@@ -35,6 +35,8 @@ export default function Notebook({classInfo, close}) {
     React.useEffect(() => {
         getNotes();
     }, [])
+
+    
     return (
         <div className="absolute h-full w-full left-0 top-0 bg-white mainContainer">
             <Button className="absolute left-2 top-2" onClick={close} >

@@ -2,10 +2,8 @@ import * as React from "react";
 import supabase from "../supabase";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
 import "../styles/Note.css";
-import {useRef} from "react";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import {Button} from "@/components/ui/button";
+import QuillWindow from "@/components/QuillWindow";
 // @ts-ignore
 export default function Note({note, refresh}) {
     const [content, setContent] = React.useState<any>(note.content);
@@ -22,7 +20,8 @@ export default function Note({note, refresh}) {
         refresh();
     }
     // @ts-ignore
-    const isSSR = typeof window === "undefined"
+
+    const isSSR = typeof window === "undefined";
     return (
         <Accordion type="single" collapsible className="w-full">
             <AccordionItem value={note.id} className={"bg-white"} >
@@ -32,10 +31,12 @@ export default function Note({note, refresh}) {
                 <AccordionContent >
                     <p className={"text-sm text-muted-foreground"} >{saved ? "Saved" : "Not Saved"}</p>
                     {
-                        !isSSR &&  <ReactQuill className={"min-h-[100px]"} theme="snow" value={content} onChange={(val) => {
-                            setContent(val);
-                            setSaved(false);
-                        }} />
+                        !isSSR &&
+                            <QuillWindow content={content} onChange={(val) => {
+                                setContent(val);
+                                setSaved(false);
+                            }} />
+
                     }
                     <Button className={"mt-5 mr-5"} onClick={saveNote} >
                         Save
