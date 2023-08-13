@@ -22,6 +22,7 @@ export default function Note({note, refresh}) {
         refresh();
     }
     // @ts-ignore
+    const isSSR = typeof window === "undefined"
     return (
         <Accordion type="single" collapsible className="w-full">
             <AccordionItem value={note.id} className={"bg-white"} >
@@ -30,10 +31,12 @@ export default function Note({note, refresh}) {
                 </AccordionTrigger>
                 <AccordionContent >
                     <p className={"text-sm text-muted-foreground"} >{saved ? "Saved" : "Not Saved"}</p>
-                    <ReactQuill className={"min-h-[100px]"} theme="snow" value={content} onChange={(val) => {
-                        setContent(val);
-                        setSaved(false);
-                    }} />
+                    {
+                        !isSSR &&  <ReactQuill className={"min-h-[100px]"} theme="snow" value={content} onChange={(val) => {
+                            setContent(val);
+                            setSaved(false);
+                        }} />
+                    }
                     <Button className={"mt-5 mr-5"} onClick={saveNote} >
                         Save
                     </Button>
