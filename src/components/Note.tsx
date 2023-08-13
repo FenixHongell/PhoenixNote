@@ -3,7 +3,7 @@ import supabase from "../supabase";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
 import "../styles/Note.css";
 import {Button} from "@/components/ui/button";
-import QuillWindow from "@/components/QuillWindow";
+import QuillWindow from "@/components/QuillWindow.jsx";
 // @ts-ignore
 export default function Note({note, refresh}) {
     const [content, setContent] = React.useState<any>(note.content);
@@ -21,7 +21,6 @@ export default function Note({note, refresh}) {
     }
     // @ts-ignore
 
-    const isSSR = typeof document === "undefined";
     return (
         <Accordion type="single" collapsible className="w-full">
             <AccordionItem value={note.id} className={"bg-white"} >
@@ -30,14 +29,10 @@ export default function Note({note, refresh}) {
                 </AccordionTrigger>
                 <AccordionContent >
                     <p className={"text-sm text-muted-foreground"} >{saved ? "Saved" : "Not Saved"}</p>
-                    {
-                        !isSSR &&
                             <QuillWindow content={content} onChange={(val) => {
                                 setContent(val);
                                 setSaved(false);
                             }} />
-
-                    }
                     <Button className={"mt-5 mr-5"} onClick={saveNote} >
                         Save
                     </Button>
