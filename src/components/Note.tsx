@@ -21,7 +21,7 @@ export default function Note({note, refresh}) {
     }
     // @ts-ignore
 
-    const isSSR = typeof window === "undefined";
+    const isSSR = typeof document === "undefined";
     return (
         <Accordion type="single" collapsible className="w-full">
             <AccordionItem value={note.id} className={"bg-white"} >
