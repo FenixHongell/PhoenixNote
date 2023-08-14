@@ -5,14 +5,19 @@ export default class QuillWindow extends React.Component {
       super(props)
       if (document) {
          this.quill = require('react-quill')
+         this.focused = false;
       }
    }
+
+
 
    render() {
       const Quill = this.quill
       if (Quill) {
          return (
              <Quill
+                 onFocus={() => this.focused = true}
+                 onBlur={() => this.focused = false}
                  className={"min-h-[100px]"}
                  onChange={this.props.onChange}
                  theme="snow"
