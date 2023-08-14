@@ -12,6 +12,7 @@ export default function Note({note, refresh}) {
     const [saved, setSaved] = React.useState(true);
     const [lastSaved, setLastContent] = React.useState(note.content)
     const [open, setOpen] = React.useState(false);
+    const [index, setIndex] = React.useState(0);
 
     async function saveNote() {
         const {error} = await supabase.from("note").update({content: content}).eq("id", note.id);
@@ -26,14 +27,6 @@ export default function Note({note, refresh}) {
         refresh();
     }
 
-    React.useEffect(() => {
-        setInterval(function() {
-            if (lastSaved !== content) {
-                saveNote();
-            }
-        }, 60 * 1000);
-    }, [])
-
     // @ts-ignore
     return (
         <Accordion type="single" collapsible className="w-full">
@@ -46,6 +39,12 @@ export default function Note({note, refresh}) {
                             <QuillWindow content={content} onChange={(val:string) => {
                                 setContent(val);
                                 setSaved(false);
+                                if (index >= 10) {
+                                    saveNote();
+                                    setIndex(0);
+                                } else {
+                                    setIndex(index + 1);
+                                }
                             }} />
                     <Button className={"mt-5 mr-5"} onClick={saveNote} >
                         Save
