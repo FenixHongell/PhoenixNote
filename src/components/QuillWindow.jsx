@@ -21,7 +21,7 @@ export default class QuillWindow extends React.Component {
                  modules={{
                     toolbar: [
                         [{ header: [1, 2, 3, false] }], ["bold", "italic", "underline", "strike"],
-                        ["formula"], [{ color: [] }, { background: [] }],  [{ align: [] }], ["clean"]
+                        ["formula"], [{ color: [] }, { background: [] }],  [{ align: [] }]
                     ]
                  }}
                  onFocus={() => this.focused = true}
