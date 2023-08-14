@@ -33,6 +33,7 @@
     "date-fns": "^2.30.0",
     "gatsby": "^5.11.0",
     "gatsby-plugin-postcss": "^6.11.0",
+    "katex": "^0.16.8",
     "lucide-react": "^0.265.0",
     "postcss": "^8.4.27",
     "react": "^18.2.0",
