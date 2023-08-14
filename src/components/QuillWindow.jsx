@@ -6,7 +6,6 @@ export default class QuillWindow extends React.Component {
       super(props)
       if (document) {
          this.quill = require('react-quill')
-         this.focused = false;
          window.katex = require("katex");
       }
    }
@@ -24,12 +23,10 @@ export default class QuillWindow extends React.Component {
                         ["formula"], [{ color: [] }, { background: [] }],  [{ align: [] }]
                     ]
                  }}
-                 onFocus={() => this.focused = true}
-                 onBlur={() => this.focused = false}
                  className={"min-h-[100px]"}
                  onChange={this.props.onChange}
                  theme="snow"
-                 value={this.props.content}
+                 defaultValue={this.props.content}
              />
          )
       } else {

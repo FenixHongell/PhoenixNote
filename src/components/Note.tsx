@@ -37,7 +37,7 @@ export default function Note({note, refresh}) {
                 <AccordionContent >
                     <p className={"text-sm text-muted-foreground"} >{saved ? "Saved" : "Not Saved"}</p>
                             <QuillWindow content={content} onChange={(val:string) => {
-                                setContent(val);
+                                setContent(val.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;'));
                                 setSaved(false);
                                 if (index >= 10) {
                                     saveNote();
