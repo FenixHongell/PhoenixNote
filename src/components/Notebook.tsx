@@ -46,7 +46,10 @@ export default function Notebook({classInfo, close}) {
             </h2>
             {
                 notes.sort((a,b) => {
-                    if (!a.header.contains(" ")) return a.header - b.header;
+                    if (a.header.split(" ").length === 1) return a.header - b.header;
+                    if (a.header.split(" ").length > 2) return a.header - b.header;
+                    if (isNaN(parseFloat(a.header.split(" ")[1]))) return a.header - b.header;
+                    if (isNaN(parseFloat(b.header.split(" ")[1]))) return a.header - b.header;
 
                     return parseFloat(a.header.split(" ")[1])-parseFloat(b.header.split(" ")[1]);
                 }).map((note) => {
