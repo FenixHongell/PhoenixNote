@@ -36,7 +36,6 @@ export default function Notebook({classInfo, close}) {
         getNotes();
     }, [])
 
-    
     return (
         <div className="absolute h-full w-full left-0 top-0 bg-white mainContainer">
             <Button className="absolute left-2 top-2" onClick={close} >
@@ -46,8 +45,11 @@ export default function Notebook({classInfo, close}) {
                 {classInfo.name}
             </h2>
             {
-                notes.map((note) => {
+                notes.sort((a,b) => {
+                    if (!a.header.contains(" ")) return a.header - b.header;
 
+                    return parseFloat(a.header.split(" ")[1])-parseFloat(b.header.split(" ")[1]);
+                }).map((note) => {
                     return (
                         <Note refresh={getNotes} note={note} />
                     )
